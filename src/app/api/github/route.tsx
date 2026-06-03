@@ -2,12 +2,6 @@ export async function GET() {
   try {
     const repo = await fetch(
       "https://api.github.com/users/Prakash777-code/repos",
-      {
-        headers: {
-          Accept: "application/vnd.github+json",
-          "User-Agent": "portfolio-app",
-        },
-      },
     );
 
     if (!repo.ok) {
