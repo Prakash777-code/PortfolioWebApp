@@ -2,10 +2,17 @@ export async function GET() {
   try {
     const repo = await fetch(
       "https://api.github.com/users/Prakash777-code/repos",
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "portfolio-app",
+        },
+      },
     );
 
     if (!repo.ok) {
-      return Response.json({ error: "GitHub API failed" }, { status: 500 });
+      console.error("GitHub API failed:", repo.status);
+      return Response.json([]);
     }
 
     const repoJson = await repo.json();
@@ -19,6 +26,7 @@ export async function GET() {
 
     return Response.json(repoData);
   } catch (err) {
-    return Response.json({ error: "Server error" }, { status: 500 });
+    console.error("Server error:", err);
+    return Response.json([]);
   }
 }
