@@ -5,6 +5,10 @@ export const dynamic = "force-dynamic";
 export default async function Projects() {
   const repos = await getRepos();
 
+  if (!Array.isArray(repos)) {
+    return <div className="text-white">Failed to load projects</div>;
+  }
+
   return (
     <section className="px-6 py-20">
       <div className="mb-12 text-center">
