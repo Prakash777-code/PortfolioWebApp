@@ -1,6 +1,6 @@
 export default async function getRepos() {
   try {
-    const res = await fetch("http://localhost:3000/api/github", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/github`, {
       cache: "no-store",
     });
 
