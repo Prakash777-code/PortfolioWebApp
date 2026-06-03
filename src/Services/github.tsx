@@ -1,7 +1,20 @@
 export default async function getRepos() {
-  const repos = await fetch("http://localhost:3000/api/github", {
-    cache: "no-store",
-  });
+  try {
+    const baseUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      "http://localhost:3000";
 
-  return repos.json();
+    const res = await fetch(`${baseUrl}/api/github`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch repos");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
