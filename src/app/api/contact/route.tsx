@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-
   try {
-    
     const body = await req.json();
 
     const { name, email, message } = body;
@@ -14,18 +12,22 @@ export async function POST(req: Request) {
     console.log("Message:", message);
     console.log("===================================");
 
-    return NextResponse.json({
+    const response = {
       success: true,
-      message: "Form Submitted Successfully",
-    });
-  } catch (error) {
-    return (
-      NextResponse.json({
-        success: false,
-        message: "Something went wrong",
-      }),
-      { status: 500 }
-    );
-  }
+      message: "Form submitted successfully",
+    };
 
+    console.log("Positive Response:", response);
+
+    return NextResponse.json(response);
+  } catch (error) {
+    const response = {
+      success: false,
+      message: "Server Error",
+    };
+
+    console.log("Negative Response:", response);
+
+    return NextResponse.json(response, { status: 500 });
+  }
 }
